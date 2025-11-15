@@ -207,69 +207,70 @@ if (profileImage) {
         }
     };
 
-    // 改进的图片加载逻辑，支持多种路径格式
+    // 改进的图片加载逻辑，支持多种路径和格式
     function loadProfileImage() {
-        const imagePath = profileImage.getAttribute('src') || 'images/profile.jpg';
+        // 获取原始图片路径（去掉扩展名）
+        const basePath = profileImage.getAttribute('src') || 'images/profile';
+        const baseImagePath = basePath.replace(/\.(jpg|jpeg|png|gif|webp)$/i, '');
         
-        // 如果图片已经有src，先检查是否已加载
+        // 检查图片是否已经加载成功
         if (profileImage.complete && profileImage.naturalHeight !== 0) {
             profileImage.onload();
             return;
         }
         
-        // 创建新的Image对象来预加载
-        const img = new Image();
+        // 支持的图片格式
+        const imageFormats = ['.webp', '.png', '.jpg', '.jpeg', '.gif'];
         
-        img.onload = function() {
-            // 图片加载成功，设置到实际元素
-            profileImage.src = imagePath;
-            profileImage.style.display = 'block';
-            profileImage.style.opacity = '1';
-            profileImage.classList.add('loaded');
-            if (imagePlaceholder) {
-                imagePlaceholder.classList.add('hidden');
+        // 生成所有可能的图片路径
+        const imagePaths = [];
+        imageFormats.forEach(format => {
+            imagePaths.push(baseImagePath + format);
+            imagePaths.push('./' + baseImagePath + format);
+            imagePaths.push('/' + baseImagePath + format);
+        });
+        
+        let currentIndex = 0;
+        
+        const tryNextImage = () => {
+            if (currentIndex >= imagePaths.length) {
+                // 所有图片都失败，显示占位符
+                profileImage.style.display = 'none';
+                if (imagePlaceholder) {
+                    imagePlaceholder.classList.remove('hidden');
+                }
+                return;
             }
-        };
-        
-        img.onerror = function() {
-            // 尝试备用路径
-            const fallbackPaths = [
-                './images/profile.jpg',
-                'images/profile.jpg',
-                '/images/profile.jpg'
-            ];
             
-            let currentIndex = 0;
-            const tryNextPath = () => {
-                if (currentIndex < fallbackPaths.length) {
-                    const nextImg = new Image();
-                    nextImg.onload = function() {
-                        profileImage.src = fallbackPaths[currentIndex];
-                        profileImage.style.display = 'block';
-                        profileImage.style.opacity = '1';
-                        profileImage.classList.add('loaded');
-                        if (imagePlaceholder) {
-                            imagePlaceholder.classList.add('hidden');
-                        }
-                    };
-                    nextImg.onerror = function() {
-                        currentIndex++;
-                        tryNextPath();
-                    };
-                    nextImg.src = fallbackPaths[currentIndex];
-                } else {
-                    // 所有路径都失败，显示占位符
-                    profileImage.style.display = 'none';
-                    if (imagePlaceholder) {
-                        imagePlaceholder.classList.remove('hidden');
-                    }
+            const img = new Image();
+            const currentPath = imagePaths[currentIndex];
+            
+            img.onload = function() {
+                // 图片加载成功，设置到实际元素
+                profileImage.src = currentPath;
+                profileImage.style.display = 'block';
+                profileImage.style.opacity = '1';
+                profileImage.classList.add('loaded');
+                if (imagePlaceholder) {
+                    imagePlaceholder.classList.add('hidden');
                 }
             };
             
-            tryNextPath();
+            img.onerror = function() {
+                // 尝试下一个图片路径
+                currentIndex++;
+                tryNextImage();
+            };
+            
+            // 设置图片的crossOrigin属性（如果需要）
+            img.crossOrigin = 'anonymous';
+            
+            // 开始加载图片
+            img.src = currentPath;
         };
         
-        img.src = imagePath;
+        // 开始尝试加载图片
+        tryNextImage();
     }
     
     // 页面加载完成后尝试加载图片
