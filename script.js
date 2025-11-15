@@ -219,6 +219,7 @@ if (profileImage) {
             return;
         }
         
+<<<<<<< HEAD
         // 支持的图片格式
         const imageFormats = ['.webp', '.png', '.jpg', '.jpeg', '.gif'];
         
@@ -271,6 +272,61 @@ if (profileImage) {
         
         // 开始尝试加载图片
         tryNextImage();
+=======
+        // 创建新的Image对象来预加载
+        const img = new Image();
+        
+        img.onload = function() {
+            // 图片加载成功，设置到实际元素
+            profileImage.src = imagePath;
+            profileImage.style.display = 'block';
+            profileImage.style.opacity = '1';
+            profileImage.classList.add('loaded');
+            if (imagePlaceholder) {
+                imagePlaceholder.classList.add('hidden');
+            }
+        };
+        
+        img.onerror = function() {
+            // 尝试备用路径
+            const fallbackPaths = [
+                './images/profile.jpg',
+                'images/profile.jpg',
+                '/images/profile.jpg'
+            ];
+            
+            let currentIndex = 0;
+            const tryNextPath = () => {
+                if (currentIndex < fallbackPaths.length) {
+                    const nextImg = new Image();
+                    nextImg.onload = function() {
+                        profileImage.src = fallbackPaths[currentIndex];
+                        profileImage.style.display = 'block';
+                        profileImage.style.opacity = '1';
+                        profileImage.classList.add('loaded');
+                        if (imagePlaceholder) {
+                            imagePlaceholder.classList.add('hidden');
+                        }
+                    };
+                    nextImg.onerror = function() {
+                        currentIndex++;
+                        tryNextPath();
+                    };
+                    nextImg.src = fallbackPaths[currentIndex];
+                } else {
+                    // 所有路径都失败，显示占位符
+                    profileImage.style.display = 'none';
+                    if (imagePlaceholder) {
+                        imagePlaceholder.classList.remove('hidden');
+                    }
+                }
+            };
+            
+            tryNextPath();
+        };
+        
+        img.src = imagePath;
+>>>>>>> 31bdfb5cda5656653c7caa9470754ae8a3e4393c
     }
     
     // 页面加载完成后尝试加载图片
