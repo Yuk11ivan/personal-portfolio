@@ -189,13 +189,17 @@ const profileImage = document.getElementById('profile-image');
 const imagePlaceholder = document.getElementById('image-placeholder');
 
 if (profileImage) {
+    // 图片加载成功
     profileImage.onload = function() {
         this.style.display = 'block';
+        this.style.opacity = '1';
+        this.classList.add('loaded');
         if (imagePlaceholder) {
             imagePlaceholder.classList.add('hidden');
         }
     };
 
+    // 图片加载失败
     profileImage.onerror = function() {
         this.style.display = 'none';
         if (imagePlaceholder) {
@@ -203,8 +207,80 @@ if (profileImage) {
         }
     };
 
-    // 尝试加载图片
-    profileImage.src = profileImage.src || 'images/profile.jpg';
+    // 改进的图片加载逻辑，支持多种路径格式
+    function loadProfileImage() {
+        const imagePath = profileImage.getAttribute('src') || 'images/profile.jpg';
+        
+        // 如果图片已经有src，先检查是否已加载
+        if (profileImage.complete && profileImage.naturalHeight !== 0) {
+            profileImage.onload();
+            return;
+        }
+        
+        // 创建新的Image对象来预加载
+        const img = new Image();
+        
+        img.onload = function() {
+            // 图片加载成功，设置到实际元素
+            profileImage.src = imagePath;
+            profileImage.style.display = 'block';
+            profileImage.style.opacity = '1';
+            profileImage.classList.add('loaded');
+            if (imagePlaceholder) {
+                imagePlaceholder.classList.add('hidden');
+            }
+        };
+        
+        img.onerror = function() {
+            // 尝试备用路径
+            const fallbackPaths = [
+                './images/profile.jpg',
+                'images/profile.jpg',
+                '/images/profile.jpg'
+            ];
+            
+            let currentIndex = 0;
+            const tryNextPath = () => {
+                if (currentIndex < fallbackPaths.length) {
+                    const nextImg = new Image();
+                    nextImg.onload = function() {
+                        profileImage.src = fallbackPaths[currentIndex];
+                        profileImage.style.display = 'block';
+                        profileImage.style.opacity = '1';
+                        profileImage.classList.add('loaded');
+                        if (imagePlaceholder) {
+                            imagePlaceholder.classList.add('hidden');
+                        }
+                    };
+                    nextImg.onerror = function() {
+                        currentIndex++;
+                        tryNextPath();
+                    };
+                    nextImg.src = fallbackPaths[currentIndex];
+                } else {
+                    // 所有路径都失败，显示占位符
+                    profileImage.style.display = 'none';
+                    if (imagePlaceholder) {
+                        imagePlaceholder.classList.remove('hidden');
+                    }
+                }
+            };
+            
+            tryNextPath();
+        };
+        
+        img.src = imagePath;
+    }
+    
+    // 页面加载完成后尝试加载图片
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadProfileImage);
+    } else {
+        loadProfileImage();
+    }
+    
+    // 也监听窗口加载完成事件（移动端可能需要）
+    window.addEventListener('load', loadProfileImage);
 }
 
 // ===== 滚动动画 =====
