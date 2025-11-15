@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王明宇 - 个人展示页</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">王明宇</div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">首页</a></li>
+                <li><a href="#basic-info" class="nav-link">基本信息</a></li>
+                <li><a href="#education" class="nav-link">教育背景</a></li>
+                <li><a href="#skills" class="nav-link">专业技能</a></li>
+                <li><a href="#interests" class="nav-link">兴趣方向</a></li>
+                <li><a href="#evaluation" class="nav-link">自我评价</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页横幅 -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <canvas id="dataVisualization"></canvas>
+        </div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="profile-image-container">
+                    <img src="images/profile.jpg" alt="王明宇" class="profile-image" id="profile-image">
+                    <div class="image-placeholder" id="image-placeholder">
+                        <i class="fas fa-user"></i>
+                        <p>请将个人照片放置于 images/profile.jpg</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-right">
+                <h1 class="hero-name">王明宇</h1>
+                <p class="hero-subtitle">2024级智能经济专业・潜力开发者</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="3.91">0</span>
+                        <span class="stat-label">GPA</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="2">0</span>
+                        <span class="stat-label">专业排名</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- 基本信息区 -->
+    <section id="basic-info" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-user-circle"></i>
+                基本信息
+            </h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-id-card"></i>
+                    <h3>姓名</h3>
+                    <p>王明宇</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-venus-mars"></i>
+                    <h3>性别</h3>
+                    <p>男</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>籍贯</h3>
+                    <p>浙江义乌</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>年级</h3>
+                    <p>2024级</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>联系电话</h3>
+                    <p><a href="tel:15805890722">15805890722</a></p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>电子邮箱</h3>
+                    <p><a href="mailto:320673961@qq.com">320673961@qq.com</a></p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>性格</h3>
+                    <p>随和，真诚待人</p>
+                </div>
+                <div class="info-card douyin-card">
+                    <i class="fab fa-tiktok"></i>
+                    <h3>抖音账号</h3>
+                    <p class="douyin-name">【宇酱】</p>
+                    <p class="douyin-desc">分享日常生活，风格轻松治愈，传递积极乐观的生活态度</p>
+                    <a href="https://www.douyin.com" target="_blank" class="douyin-link">
+                        <i class="fab fa-tiktok"></i> 访问抖音主页
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育背景区 -->
+    <section id="education" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-graduation-cap"></i>
+                教育背景
+            </h2>
+            <div class="education-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>大学阶段</h3>
+                        <div class="education-details">
+                            <p class="school-name"><i class="fas fa-university"></i> 武汉理工大学经济学院</p>
+                            <p class="major"><i class="fas fa-book"></i> 智能经济专业</p>
+                            <div class="courses">
+                                <h4>主要课程：</h4>
+                                <ul>
+                                    <li>数据分析与挖掘</li>
+                                    <li>智能经济系统</li>
+                                    <li>大数据处理技术</li>
+                                    <li>人工智能应用</li>
+                                    <li>供应链管理</li>
+                                </ul>
+                            </div>
+                            <div class="gpa-info">
+                                <span class="gpa-badge">
+                                    <i class="fas fa-star"></i> GPA: 3.91
+                                </span>
+                                <span class="rank-badge">
+                                    <i class="fas fa-trophy"></i> 专业排名: 2
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>高中阶段</h3>
+                        <div class="education-details">
+                            <p class="school-name"><i class="fas fa-school"></i> 浙江省义乌中学</p>
+                            <div class="courses">
+                                <h4>选考科目：</h4>
+                                <ul>
+                                    <li>化学</li>
+                                    <li>地理</li>
+                                    <li>技术</li>
+                                </ul>
+                            </div>
+                            <div class="gpa-info">
+                                <span class="gpa-badge">
+                                    <i class="fas fa-graduation-cap"></i> 高考总分: 647
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 专业技能区 -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-tools"></i>
+                专业技能
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>数据分析</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>trae CN 智能软件</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-code"></i>
+                            <span>SQL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <i class="fas fa-brain"></i>
+                        <h3>智能技术应用</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-server"></i>
+                            <span>大数据处理</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-robot"></i>
+                            <span>AI 工具</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <i class="fas fa-search"></i>
+                        <h3>市场调研</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>市场分析</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-poll"></i>
+                            <span>数据调研</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <i class="fas fa-laptop"></i>
+                        <h3>办公软件</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-file-word"></i>
+                            <span>Word</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-file-excel"></i>
+                            <span>Excel</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-file-powerpoint"></i>
+                            <span>PowerPoint</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 兴趣方向区 -->
+    <section id="interests" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-heart"></i>
+                兴趣方向
+            </h2>
+            <div class="interests-container">
+                <div class="interest-section">
+                    <h3><i class="fas fa-lightbulb"></i> 研究方向</h3>
+                    <div class="interest-grid">
+                        <div class="interest-item">
+                            <i class="fas fa-boxes"></i>
+                            <span>供应链系统优化</span>
+                        </div>
+                        <div class="interest-item">
+                            <i class="fas fa-chart-network"></i>
+                            <span>智能数据分析</span>
+                        </div>
+                        <div class="interest-item">
+                            <i class="fas fa-cogs"></i>
+                            <span>经济模型构建</span>
+                        </div>
+                        <div class="interest-item">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>数字化转型</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="interest-section">
+                    <h3><i class="fas fa-star"></i> 个人爱好</h3>
+                    <div class="interest-grid">
+                        <div class="interest-item">
+                            <i class="fas fa-wine-glass-alt"></i>
+                            <span>品酒品茶</span>
+                        </div>
+                        <div class="interest-item">
+                            <i class="fas fa-table-tennis"></i>
+                            <span>网球</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 自我评价区 -->
+    <section id="evaluation" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-comment-dots"></i>
+                自我评价
+            </h2>
+            <div class="evaluation-content">
+                <div class="evaluation-card">
+                    <i class="fas fa-quote-left"></i>
+                    <p>作为一名智能经济专业的学生，我始终保持着对数据分析和智能技术的浓厚兴趣。在学习过程中，我注重理论与实践相结合，不断提升自己的专业技能和解决问题的能力。性格随和，真诚待人，善于团队合作，能够快速适应新环境。未来，我希望能够在智能经济领域深耕，为数字化转型贡献自己的力量。</p>
+                    <i class="fas fa-quote-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>个人展示页・基于智能经济专业背景制作</p>
+            <div class="footer-links">
+                <a href="mailto:320673961@qq.com"><i class="fas fa-envelope"></i></a>
+                <a href="tel:15805890722"><i class="fas fa-phone"></i></a>
+                <a href="https://www.douyin.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
